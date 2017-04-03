@@ -15,11 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
-from article.views import home,detail,hello
+from article.views import home,detail,hello,archives,about_me,search_tag,blog_search
+from article.views import RSSFeed
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', home),
-    url(r'^(?P<my_args>\d+)/$',detail, name='detail'),
+    url(r'^$', home, name='home'),
+    url(r'^(?P<id>\d+)/$',detail, name='detail'),
     url(r'^hello/', hello),
+    url(r'^archives/$', archives, name = 'archives'),
+    url(r'^aboutme/$', about_me, name = 'about_me'),
+    url(r'^tag/(?P<tag>\w+)/$', search_tag, name = 'search_tag'),
+    url(r'^search/$',blog_search, name = 'search'),
+    url(r'^feed/$', RSSFeed(), name = "RSS"),
 ]
